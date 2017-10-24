@@ -1,0 +1,67 @@
+{{bread-crumb title=title}}
+<div class="">
+  <div class="col-sm-8">
+    {{#each products as |product|}}
+      {{#unless product.isNew}}
+        <div class="product-box col-sm-4">
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <div class="product text-center">
+                <p class="lead">{{product.name}}</p>
+              </div>
+            </div>
+            <div class="panel-footer text-center">
+              <p>
+                <span>Ksh. {{product.unitPrice}}</span>
+                <span>In stock {{product.currentStock}}</span>
+              </p>
+              <p>
+                <button {{action 'setEditingproduct' product.id}} class="btn btn-sm btn-info">Edit</button>
+                <button {{action 'deleteProduct' product}} class="btn btn-sm btn-danger">Delete</button>
+              </p>
+            </div>
+          </div>
+        </div>
+      {{/unless}}
+    {{/each}}
+  </div>
+  <div class="col-sm-4">
+    {{#if isEditing}}
+      <form class="form">
+        <div class="form-group">
+          <label for="">Name</label>
+          {{input type="text" class="form-control" value=product.name placeholder="Name ..."}}
+        </div>
+        <div class="form-group">
+          <label for="">Description</label>
+          {{input type="text" class="form-control" value=product.description placeholder="Description ..."}}
+        </div>
+        <div class="form-group">
+          <label for="">SKU Code</label>
+          {{input type="text" class="form-control" value=product.sku placeholder="Item code ..."}}
+        </div>
+        <div class="form-group">
+          <label for="">Distribution Unit</label>
+          {{input type="text" class="form-control" value=product.form placeholder="Units ..."}}
+        </div>
+        <div class="form-group">
+          <label for="">Cost</label>
+          {{input type="text" class="form-control" value=product.cost placeholder="Buying cost ..."}}
+        </div>
+        <div class="form-group">
+          <label for="">Price</label>
+          {{input type="text" class="form-control" value=product.unitPrice placeholder="Unit price ..."}}
+        </div>
+        <div class="form-group">
+          <label for="">Quantity</label>
+          {{input type="text" class="form-control" value=product.startStock placeholder="Quantity ..."}}
+        </div>
+
+        <div class="form-group text-right">
+          <button {{action 'editProduct' product}} class='btn btn-lg btn-info'>Save</button>
+          <button {{action 'cancelEdit' product}} class='btn btn-lg btn-danger'>Cancel</button>
+        </div>
+      </form>
+    {{/if}}
+  </div>
+</div>

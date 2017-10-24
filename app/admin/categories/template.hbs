@@ -1,0 +1,41 @@
+{{bread-crumb title=title}}
+<div class="">
+  <div class="col-sm-6">
+    <ul class="list-group clearfix">
+      <li class="list-group-item list-group-item-success">Current Categories</li>
+      {{#each model as |category|}}
+        {{#unless category.isNew}}
+          {{#if category.isEditing}}
+            <li class="list-group-item clearfix">
+              {{input class='form-control' value=category.name}}
+              <span class="pull-right">
+                <button {{action 'updateCategory' category}} class='btn btn-sm btn-success'>Save</button>
+                <button {{action 'cancelEdit' category}} class='btn btn-sm btn-danger'>Cancel</button>
+              </span>
+            </li>
+          {{else}}
+            <li class="list-group-item clearfix">
+              {{#link-to 'admin.categories.category' category.id}}
+                {{category.name}}
+              {{/link-to}}
+              <span class="pull-right">
+                <span class="badge">10</span>
+                <button {{action 'editCategory' category}} class='btn btn-sm btn-default'>Edit</button>
+                <button {{action 'deleteCategory' category}} class='btn btn-sm btn-danger'>Delete</button>
+              </span>
+            </li>
+          {{/if}}
+        {{/unless}}
+      {{/each}}
+    </ul>
+    <hr>
+    <h2>Add category</h2>
+    <form class="form" {{action 'addCategory' newCategory on='submit'}}>
+      <div class="form-group">
+        <label for="">Name</label>
+        {{input type="text" class="form-control" value=newCategory.name placeholder="Category name..."}}
+      </div>
+    </form>
+  </div>
+</div>
+{{outlet}}
